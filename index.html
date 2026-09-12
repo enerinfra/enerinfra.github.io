@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EnerInfra — POWERBOARD</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0E1B33;--amber:#F2A31B;--ink:#1c1c1e;--muted:#5b6170;--paper:#ffffff;--line:#e4e6ec}
+*{box-sizing:border-box}body{margin:0;font-family:"Noto Sans JP","Noto Sans KR",system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.75}
+main{max-width:640px;margin:0 auto;padding:32px 20px 80px}
+.greet{border-left:6px solid var(--amber);padding:6px 0 6px 18px;margin:0 0 28px}
+.greet h1{font-size:26px;margin:0 0 6px;color:var(--navy);font-weight:700}
+.greet p{margin:0;color:var(--muted)}
+.voice{display:flex;align-items:center;gap:12px;margin:0 0 36px}
+.voice button{background:var(--navy);color:#fff;border:0;border-radius:999px;padding:10px 18px;font:inherit;font-weight:700;cursor:pointer}
+.voice span{color:var(--muted);font-size:14px}
+.gauge{display:flex;align-items:center;gap:20px;padding:20px;border:1px solid var(--line);border-radius:14px;margin:0 0 36px}
+.gauge svg{flex:none}
+.gauge b{display:block;font-size:22px;color:var(--navy)}
+.gauge small{color:var(--muted)}
+h2{font-size:18px;margin:36px 0 10px;color:var(--navy)}
+ul{padding-left:20px;margin:0}li{margin:4px 0}
+.nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 36px}
+.nav a{display:block;padding:18px 16px;border:1.5px solid var(--navy);border-radius:14px;color:var(--navy);text-decoration:none;font-weight:700}
+.nav a small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+.lang{display:flex;gap:8px;margin:0 0 20px}.lang button{font:inherit;border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 14px;cursor:pointer}.lang button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+[hidden]{display:none!important}
+footer{margin-top:48px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<main>
+  <div class="greet"><h1 id="greet-title">はじめまして。</h1><p id="greet-sub">株式会社エナーインフラ 代表取締役 ユ・ワンジェです。</p></div>
+
+  <div class="voice"><button id="play" type="button">▶ 10秒のごあいさつを聞く</button><span>音声 · 日本語</span><audio id="voice" src="voice_ja.mp3" preload="none"></audio></div>
+
+  <div class="gauge">
+    <svg width="92" height="60" viewBox="0 0 92 60" aria-hidden="true"><path d="M8 52 A38 38 0 0 1 32 16" stroke="#3D9970" stroke-width="10" fill="none"/><path d="M34 15 A38 38 0 0 1 58 15" stroke="#F2A31B" stroke-width="10" fill="none"/><path d="M60 16 A38 38 0 0 1 84 52" stroke="#E24B4A" stroke-width="10" fill="none"/><line x1="46" y1="52" x2="28" y2="26" stroke="#0E1B33" stroke-width="4" stroke-linecap="round"/><circle cx="46" cy="52" r="5" fill="#0E1B33"/></svg>
+    <div><b id="live-kw">— kW</b><small id="live-note">南楊州オフィスの実測値を読み込み中…</small></div>
+  </div>
+
+  <div class="nav">
+    <a href="live.html">いまの電力を見る<small>実機POWERBOARDのリアルタイム計測</small></a>
+    <a href="ar.html">机の上にPOWERBOARDを置く<small>AR · アプリ不要</small></a>
+  </div>
+
+  <div class="lang"><button type="button" data-lang="ja" aria-pressed="true">日本語</button><button type="button" data-lang="en" aria-pressed="false">English</button></div>
+
+  <section data-l="ja">
+    <h2>POWERBOARD（パワーボード）— 分電盤で電気が「見える」</h2>
+    <p>株式会社エナーインフラは、韓国・京畿道南陽州市（ソウル近郊）に拠点を置くエネルギーIoTハードウェアのスタートアップです（2026年7月設立）。第一弾製品「POWERBOARD」は、分電盤カバーに4.3インチのディスプレイを組み込み、家庭の電力使用量と予想電気料金をリアルタイムに表示する装置です。アプリも、配線工事も、インターネット接続も不要です。</p>
+    <h2>解決する課題</h2>
+    <p>日本ではスマートメーターの普及率がほぼ100%に達していますが、データは電力会社のアプリの中に留まっています。多くの世帯はアプリを開かず、使用量を知るのは請求書が届いてからです。特に高齢者世帯や低所得世帯では、料金への不安から必要な冷暖房まで我慢してしまうケースが少なくありません。</p>
+    <h2>POWERBOARDの仕組み</h2>
+    <ul><li>既存の分電盤カバーを交換（日本向けには分電盤の外側に取り付けるオーバーレイ方式を開発中）</li><li>非侵襲のCTクランプで家庭全体の消費電力を計測</li><li>当日・当月のkWh、予想料金、料金段階ゲージ、3色ステータスを常時表示</li><li>完全オンデバイス：アプリ・会員登録・クラウド・通信契約が不要</li><li>屋内低輝度運用で10年以上の連続動作を想定（バックライト定格30,000時間）</li></ul>
+    <h2>日本市場について</h2>
+    <ul><li>スマートメーター普及率 約100% に対し、HEMS表示機器の普及率は 約2.7%</li><li>東京エリアの一般家庭で年間約18,000円の節約（kWh約10%削減を想定）。本体価格22,800円で投資回収 約1.3年</li><li>1台あたり年間約88kgのCO₂削減（東京電力EP 2024年暫定係数）</li><li>100V/15A環境および多様な分電盤寸法に対応する日本仕様を開発中。PSE認証取得のロードマップを策定中</li></ul>
+    <h2>実績</h2>
+    <ul><li>試作機を製作済み、韓国内で家庭での実使用試験を実施中</li><li>韓国環境部「エコスタートアップ」事業（2026年）、京畿道ICT製造創業支援事業（2026年）に選定</li><li>Global Explorer Tokyo（2026年9月）参加</li></ul>
+    <h2>チーム</h2>
+    <ul><li>ユ・ワンジェ（Wan Jae Yoo）— 代表取締役。IoT・組込み・自律走行システム開発10年。ハードウェアはすべて自社開発</li><li>イ・ギグァン 博士 — 経営アドバイザー（KAIST 産業工学、檀国大学 経営学部 学科長）</li><li>イ・ミギョン 博士 — 信頼性・認証アドバイザー（航空宇宙電子30年以上、元 米メリーランド大学 CALCE）</li><li>佐藤 彰 博士 — 日本アドバイザー（静岡理工科大学 特任教授、京都大学博士、元NEDO技術委員）</li><li>キム・ミンジ — ソフトウェアエンジニア</li></ul>
+    <h2>お問い合わせ</h2>
+    <p>代表取締役 ユ・ワンジェ（Wan Jae Yoo）<br>携帯 +82 10 8832 4530 ・ メール dbdhkswo@naver.com<br>〒12051 韓国 京畿道 南陽州市 榛接邑 慶福大路 425-80 慶福大学校 忠孝館 4階 6418号</p>
+  </section>
+
+  <section data-l="en" hidden>
+    <h2>POWERBOARD — see your electricity, right on the panel</h2>
+    <p>EnerInfra is an energy-IoT hardware startup based in Namyangju, Korea (near Seoul), founded in July 2026. POWERBOARD is a distribution-panel cover with a built-in 4.3-inch display that shows a household's real-time electricity use and expected bill — no app, no wiring work, no internet connection.</p>
+    <h2>The problem we solve</h2>
+    <p>Smart meters are nearly universal in Japan and Korea, but the data stays inside the utility's app. Most households only learn what they used when the bill arrives. Elderly and low-income households in particular hold back on heating and cooling out of fear of the bill.</p>
+    <h2>How POWERBOARD works</h2>
+    <ul><li>Replaces the existing panel cover (overlay version for Japanese panels in development)</li><li>Non-invasive CT clamp measures total household consumption</li><li>Shows today's and this month's kWh, expected bill, tariff-tier gauge and a three-color status</li><li>Fully on-device: no app, no account, no cloud, no subscription</li><li>Designed for 10+ years of continuous operation</li></ul>
+    <h2>Why Japan</h2>
+    <ul><li>Smart-meter coverage ≈100%, HEMS display devices ≈2.7% of households</li><li>Typical Tokyo household saves ≈¥18,000/year; ¥22,800 per unit, payback ≈1.3 years</li><li>≈88 kg CO₂ avoided per unit per year</li><li>Japan variant for 100 V / 15 A homes in development; PSE roadmap in progress</li></ul>
+    <h2>Team</h2>
+    <ul><li>Wan Jae Yoo — CEO, 10 years in IoT, embedded and autonomous systems</li><li>Lee Ki-kwang, PhD — Management advisor</li><li>Lee Mi-kyung, PhD — Reliability and certification advisor</li><li>Prof. Akira Sato, PhD — Japan advisor</li><li>Kim Min-ji — Software engineer</li></ul>
+    <h2>Contact</h2>
+    <p>Wan Jae Yoo, CEO · +82 10 8832 4530 · dbdhkswo@naver.com<br>Rm 6418, 4F Chunghyo Hall, Kyungbok University, 425-80 Gyeongbok-daero, Jinjeop-eup, Namyangju-si, Gyeonggi-do 12051, Korea</p>
+  </section>
+
+  <footer>EnerInfra Inc. · POWERBOARD</footer>
+</main>
+<script>
+// 1) personalised greeting: index.html?to=kiraboshi
+const GREET={
+  kiraboshi:{t:"きらぼし銀行の皆さま、ようこそ。",s:"9月のご面談、ありがとうございます。POWERBOARDをご紹介します。"},
+  shibuya:{t:"渋谷区の皆さま、ようこそ。",s:"区民の皆さまの電気料金の不安を減らすご提案です。"},
+  tib:{t:"Tokyo Innovation Baseの皆さま、ようこそ。",s:"韓国発のエネルギーIoTスタートアップです。"},
+  sato:{t:"佐藤先生、いつもありがとうございます。",s:"ご指導いただいた日本仕様の進捗をまとめました。"}
+};
+const to=new URLSearchParams(location.search).get('to');
+if(to&&GREET[to]){document.getElementById('greet-title').textContent=GREET[to].t;document.getElementById('greet-sub').textContent=GREET[to].s;}
+// 2) voice greeting (put voice_ja.mp3 next to this file)
+const a=document.getElementById('voice'),b=document.getElementById('play');
+b.onclick=()=>{if(a.paused){a.play().catch(()=>{b.textContent='音声ファイルは準備中です'});b.textContent='■ 停止';}else{a.pause();b.textContent='▶ 10秒のごあいさつを聞く';}};
+a.onended=()=>{b.textContent='▶ 10秒のごあいさつを聞く'};
+// 3) live reading from the published Google Sheet (see README) — falls back to a recorded value
+const SHEET_CSV='';  // paste the "publish to web → CSV" link of the readings sheet here
+async function live(){
+  try{ if(!SHEET_CSV) throw 0;
+    const t=await (await fetch(SHEET_CSV,{cache:'no-store'})).text(); const rows=t.trim().split('\n'); const last=rows[rows.length-1].split(',');
+    document.getElementById('live-kw').textContent=(+last[1]).toFixed(2)+' kW';
+    document.getElementById('live-note').textContent='南楊州オフィス · '+last[0].replace('T',' ').slice(0,16)+' 実測';
+  }catch(e){ document.getElementById('live-kw').textContent='0.42 kW'; document.getElementById('live-note').textContent='南楊州オフィス · 実機の直近記録（リアルタイム接続は準備中）'; }
+}
+live();
+// 4) language toggle
+document.querySelectorAll('.lang button').forEach(x=>x.onclick=()=>{document.querySelectorAll('.lang button').forEach(y=>y.setAttribute('aria-pressed',y===x));document.querySelectorAll('section[data-l]').forEach(s=>s.hidden=s.dataset.l!==x.dataset.lang);});
+</script>
+</body>
+</html>

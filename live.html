@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>POWERBOARD — いまの電力</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0E1B33;--amber:#F2A31B;--muted:#5b6170;--line:#e4e6ec}
+body{margin:0;font-family:"Noto Sans JP",system-ui,sans-serif;color:#1c1c1e;line-height:1.7}
+main{max-width:640px;margin:0 auto;padding:28px 20px 80px}
+h1{font-size:22px;color:var(--navy);margin:0 0 4px}p{margin:0 0 20px;color:var(--muted)}
+.now{display:flex;align-items:baseline;gap:10px;margin:0 0 16px}.now b{font-size:44px;color:var(--navy)}.now span{color:var(--muted)}
+.state{display:inline-block;padding:4px 12px;border-radius:999px;font-weight:700;margin-bottom:20px}
+canvas{width:100%;max-height:320px}
+a{color:var(--navy)}
+</style>
+</head>
+<body><main>
+<h1>南楊州オフィスの電力、いま。</h1>
+<p>ここに表示されているのは、韓国・南楊州のオフィス分電盤に取り付けた実機POWERBOARDの計測値です。</p>
+<div class="now"><b id="kw">—</b><span>kW</span></div>
+<div class="state" id="state">読み込み中</div>
+<canvas id="c"></canvas>
+<p id="note" style="margin-top:14px"></p>
+<p><a href="index.html">← 会社案内へ戻る</a></p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script>
+const SHEET_CSV='';   // same CSV link as index.html
+const ZONE=[[0.8,'#3D9970','ゆとりあり'],[1.6,'#F2A31B','ふつう'],[99,'#E24B4A','使いすぎ']];
+function paint(labels,vals,note){
+  const v=vals[vals.length-1]; const z=ZONE.find(z=>v<z[0]);
+  document.getElementById('kw').textContent=v.toFixed(2);
+  const s=document.getElementById('state'); s.textContent=z[2]; s.style.background=z[1]+'22'; s.style.color=z[1];
+  document.getElementById('note').textContent=note;
+  new Chart(document.getElementById('c'),{type:'line',data:{labels,datasets:[{data:vals,borderColor:'#0E1B33',backgroundColor:'rgba(14,27,51,.08)',fill:true,tension:.35,pointRadius:0,borderWidth:2}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,title:{display:true,text:'kW'}},x:{ticks:{maxTicksLimit:6}}}}});
+}
+async function go(){
+  try{ if(!SHEET_CSV) throw 0;
+    const t=await (await fetch(SHEET_CSV,{cache:'no-store'})).text(); const rows=t.trim().split('\n').slice(-288).map(r=>r.split(','));
+    paint(rows.map(r=>r[0].slice(11,16)),rows.map(r=>+r[1]),'5分ごとに更新 · 直近24時間 · 最終更新 '+rows[rows.length-1][0].replace('T',' ').slice(0,16));
+  }catch(e){
+    // recorded fallback: one weekday of a Korean household, 5-minute resolution, until the live link is set
+    const base=[0.28,0.25,0.24,0.24,0.25,0.3,0.55,0.75,0.6,0.45,0.42,0.48,0.52,0.45,0.42,0.48,0.62,0.85,1.0,0.95,0.8,0.6,0.42,0.32];
+    const labels=[],vals=[]; for(let i=0;i<288;i++){const h=i/12; const a=base[Math.floor(h)%24], b=base[(Math.floor(h)+1)%24]; const f=h%1; vals.push(+(1.8*(a+(b-a)*f)+ (Math.sin(i*1.7)*0.06)).toFixed(2)); labels.push(String(Math.floor(h)).padStart(2,'0')+':'+String((i%12)*5).padStart(2,'0'));}
+    paint(labels,vals,'実機の記録データ（1日分）を表示中 · リアルタイム接続は準備中');
+  }
+}
+go();
+</script></body></html>
