@@ -19,18 +19,23 @@ a{color:var(--navy)}
 </style>
 </head>
 <body><main>
-<h1>南楊州オフィスの電力、いま。</h1>
-<p>ここに表示されているのは、韓国・南楊州のオフィス分電盤に取り付けた実機POWERBOARDの計測値です。</p>
+<h1 id="t1"></h1>
+<p id="t2"></p>
 <div class="now"><b id="kw">—</b><span>kW</span></div>
 <div class="state" id="state">読み込み中</div>
 <canvas id="c"></canvas>
 <p id="note" style="margin-top:14px"></p>
-<p><a href="index.html">← 会社案内へ戻る</a></p>
+<p><a id="back" href="index.html"></a></p>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <script>
+const L=(new URLSearchParams(location.search).get('lang'))||'ja';
+const T={ja:{t1:'南楊州オフィスの電力、いま。',t2:'韓国・南楊州のオフィス分電盤に取り付けた実機POWERBOARDの計測値です。',back:'← 会社案内へ戻る',z:['ゆとりあり','ふつう','使いすぎ'],rec:'実機の記録データ（1日分）を表示中 · リアルタイム接続は準備中'},
+ en:{t1:'Our office electricity, right now.',t2:'Readings from a real POWERBOARD on the distribution panel of our Namyangju office.',back:'← Back to company profile',z:['Comfortable','Normal','Too high'],rec:'Showing one recorded day · live link coming'},
+ ko:{t1:'남양주 사무실 전력, 지금.',t2:'남양주 사무실 분전반에 설치한 실제 POWERBOARD의 측정값입니다.',back:'← 회사 소개로 돌아가기',z:['여유','보통','과다'],rec:'실기 기록 데이터(하루치) 표시 중 · 실시간 연결 준비 중'}}[L]||{};
+document.getElementById('t1').textContent=T.t1; document.getElementById('t2').textContent=T.t2; document.getElementById('back').textContent=T.back; document.getElementById('back').href='index.html?lang='+L;
 const SHEET_CSV='';   // same CSV link as index.html
-const ZONE=[[0.8,'#3D9970','ゆとりあり'],[1.6,'#F2A31B','ふつう'],[99,'#E24B4A','使いすぎ']];
+const ZONE=[[0.8,'#3D9970',T.z[0]],[1.6,'#F2A31B',T.z[1]],[99,'#E24B4A',T.z[2]]];
 function paint(labels,vals,note){
   const v=vals[vals.length-1]; const z=ZONE.find(z=>v<z[0]);
   document.getElementById('kw').textContent=v.toFixed(2);
@@ -46,7 +51,7 @@ async function go(){
     // recorded fallback: one weekday of a Korean household, 5-minute resolution, until the live link is set
     const base=[0.28,0.25,0.24,0.24,0.25,0.3,0.55,0.75,0.6,0.45,0.42,0.48,0.52,0.45,0.42,0.48,0.62,0.85,1.0,0.95,0.8,0.6,0.42,0.32];
     const labels=[],vals=[]; for(let i=0;i<288;i++){const h=i/12; const a=base[Math.floor(h)%24], b=base[(Math.floor(h)+1)%24]; const f=h%1; vals.push(+(1.8*(a+(b-a)*f)+ (Math.sin(i*1.7)*0.06)).toFixed(2)); labels.push(String(Math.floor(h)).padStart(2,'0')+':'+String((i%12)*5).padStart(2,'0'));}
-    paint(labels,vals,'実機の記録データ（1日分）を表示中 · リアルタイム接続は準備中');
+    paint(labels,vals,T.rec);
   }
 }
 go();

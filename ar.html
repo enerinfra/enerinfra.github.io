@@ -19,10 +19,11 @@ a{color:#0E1B33}
 </style>
 </head>
 <body><main>
-<h1>机の上に置いてみてください。</h1>
-<p>実物大のPOWERBOARD（175×140×26mm）です。「ARで見る」を押すとカメラが開き、いま目の前の机や壁に本体が現れます。アプリは不要です。</p>
+<h1 id="t1"></h1>
+<p id="t2"></p>
 <model-viewer id="mv" src="powerboard.glb" alt="POWERBOARD 3D model" ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" camera-controls auto-rotate shadow-intensity="1" exposure="1.1"></model-viewer>
-<button class="ar" type="button" onclick="document.getElementById('mv').activateAR()">ARで見る（カメラを起動）</button>
-<p style="margin-top:14px;font-size:14px">iPhoneはSafari、AndroidはChromeでご覧ください。</p>
-<p><a href="index.html">← 会社案内へ戻る</a></p>
+<button class="ar" type="button" onclick="document.getElementById('mv').activateAR()" id="arbtn"></button>
+<p id="t3" style="margin-top:14px;font-size:14px"></p>
+<p><a id="back" href="index.html"></a></p>
+<script>const L=(new URLSearchParams(location.search).get('lang'))||'ja';const T={ja:{t1:'机の上に置いてみてください。',t2:'実物大のPOWERBOARD（175×140×26mm）です。「ARで見る」を押すとカメラが開き、目の前の机や壁に本体が現れます。アプリは不要です。',b:'ARで見る（カメラを起動）',t3:'iPhoneはSafari、AndroidはChromeでご覧ください。',back:'← 会社案内へ戻る'},en:{t1:'Put it on your desk.',t2:'A life-size POWERBOARD (175×140×26 mm). Tap "View in AR" to open the camera and place it on the desk or wall in front of you. No app needed.',b:'View in AR (opens camera)',t3:'Use Safari on iPhone, Chrome on Android.',back:'← Back to company profile'},ko:{t1:'책상 위에 올려 보세요.',t2:'실물 크기 POWERBOARD(175×140×26mm)입니다. "AR로 보기"를 누르면 카메라가 열리고 눈앞의 책상이나 벽에 본체가 나타납니다. 앱은 필요 없습니다.',b:'AR로 보기 (카메라 실행)',t3:'아이폰은 Safari, 안드로이드는 Chrome에서 보세요.',back:'← 회사 소개로 돌아가기'}}[L];for(const k of ['t1','t2','t3'])document.getElementById(k).textContent=T[k];document.getElementById('arbtn').textContent=T.b;document.getElementById('back').textContent=T.back;document.getElementById('back').href='index.html?lang='+L;</script>
 </main></body></html>
