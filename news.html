@@ -2,12 +2,12 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="only light">
+<meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff">
 <title>소식 | ㈜에너인프라</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
-html{color-scheme:only light}
+html{color-scheme:light dark;background:#fff}
 :root{
   --bg:#F5F6F8;--bg2:#FFFFFF;--dark:#0E1B33;--dark2:#111A2B;
   --ink:#0F141C;--ink2:#5D6674;--ink3:#8B939F;
@@ -266,13 +266,17 @@ footer{background:#EEF0F3;color:var(--ink3);font-size:12px;padding:26px 0;border
 .map{background:#E3E7EC;border-radius:14px;height:260px;display:grid;place-items:center;color:var(--ink3);font-size:13px;text-align:center;padding:20px}
 @media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr}.types{grid-template-columns:1fr 1fr}.news a{grid-template-columns:1fr;gap:6px}}
 
-.nav a.on{opacity:1;font-weight:700;color:var(--navy)}</style>
+.nav a.on{opacity:1;font-weight:700;color:var(--navy)}@media (prefers-color-scheme: dark){html,body{background:#fff}}
+@media (min-width:1000px){body{zoom:1.12}}
+.nav a{font-size:14px}.hero{padding-bottom:40px}.scene{padding:88px 0}.cta{padding:80px 5vw}
+.caps4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}@media(max-width:900px){.caps4{grid-template-columns:1fr 1fr}}@media(max-width:520px){.caps4{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <header class="top" id="top">
   <div class="wrap top-in">
     <a href="index.html" class="brand">
-      <svg viewBox="0 0 250 40" aria-hidden="true" style="width:auto;height:22px"><rect x="0" y="12" width="14" height="4" rx="2" fill="#14346E"/><rect x="0" y="24" width="14" height="4" rx="2" fill="#14346E"/><rect x="16" y="2" width="36" height="36" rx="8" fill="#F2A31B"/><text x="62" y="32" font-family="Pretendard Variable,Pretendard,'Noto Sans KR','Noto Sans JP',sans-serif" font-weight="900" font-size="34" letter-spacing="-1" fill="#14346E">ENERINFRA</text></svg>
+      <svg viewBox="0 0 220 40" aria-hidden="true" style="width:auto;height:24px"><rect x="0" y="11" width="12" height="4" rx="2" fill="#F2A31B"/><rect x="0" y="25" width="12" height="4" rx="2" fill="#F2A31B"/><rect x="16" y="2" width="200" height="36" rx="9" fill="#F2A31B"/><path d="M110 2h97a9 9 0 0 1 9 9v18a9 9 0 0 1-9 9h-97z" fill="#14346E"/><text x="27" y="30" font-family="Pretendard Variable,Pretendard,'Noto Sans KR','Noto Sans JP',sans-serif" font-weight="900" font-size="27" letter-spacing="-0.5" fill="#14346E">ENER</text><text x="118" y="30" font-family="Pretendard Variable,Pretendard,'Noto Sans KR','Noto Sans JP',sans-serif" font-weight="900" font-size="27" letter-spacing="-0.5" fill="#F2A31B">INFRA</text></svg>
     </a>
     <nav class="nav" id="nav">
       <a href="product.html" data-t="n_product"></a>
@@ -292,6 +296,7 @@ footer{background:#EEF0F3;color:var(--ink3);font-size:12px;padding:26px 0;border
 <section class="ph"><div class="wrap"><div class="kick">NEWS</div><h1 data-t="h1"></h1><p data-t="h1p"></p></div></section>
 <section class="sec white" style="padding-top:20px">
   <div class="wrap news rv">
+    <a href="#"><span class="d">2026.09</span><div><div class="tag" data-t="g6"></div><h3 data-t="n6h"></h3><p data-t="n6p"></p></div></a>
     <a href="#"><span class="d">2026.09</span><div><div class="tag" data-t="g4"></div><h3 data-t="n4h"></h3><p data-t="n4p"></p></div></a>
     <a href="#"><span class="d">2026.09</span><div><div class="tag" data-t="g5"></div><h3 data-t="n5h"></h3><p data-t="n5p"></p></div></a>
     <a href="#"><span class="d">2026.08</span><div><div class="tag" data-t="g3"></div><h3 data-t="n3h"></h3><p data-t="n3p"></p></div></a>
@@ -311,7 +316,7 @@ footer{background:#EEF0F3;color:var(--ink3);font-size:12px;padding:26px 0;border
   </div>
 </footer>
 <script>
-const I18N={"ko": {"brand": "에너인프라", "n_product": "제품", "n_company": "회사소개", "n_news": "소식", "n_contact": "문의", "ft": "© 2026 주식회사 에너인프라", "ftaddr": "경기도 남양주시 오남읍 진건오남로 516-38, 나동 4층 401호", "cta_h": "도입과 협업을 이야기하고 싶습니다.", "cta_p": "제품 도입, 실증 참여, 해외 파트너십 모두 환영합니다.", "cta_b": "문의하기", "h1": "소식", "h1p": "회사와 제품의 진행 상황을 기록합니다.", "g1": "COMPANY", "n1h": "㈜에너인프라 설립", "n1p": "경기도 남양주에 법인을 설립하고 사업을 시작했습니다.", "g2": "PROGRAM", "n2h": "환경부 에코스타트업 2026 선정", "n2p": "예비창업자 신분으로 POWERBOARD 시제품 개발·실증 과제에 선정되었습니다.", "g3": "PRODUCT", "n3h": "POWERBOARD 시제품 3세트 완성", "n3p": "2차 기판(R02)과 케이스 목업을 적용한 동작 시제품이 완성되었습니다.", "g5": "COMPANY", "n5h": "경복대학교 창업보육센터 입주", "n5p": "남양주캠퍼스 충효관에 사무실과 연구공간을 마련했습니다.", "g4": "GLOBAL", "n4h": "도쿄 파트너 미팅 진행", "n4p": "일본 스타트업 지원기관 및 벤처캐피털과 제조·실증 파트너십을 논의합니다."}, "ja": {"brand": "エナーインフラ", "n_product": "製品", "n_company": "会社紹介", "n_news": "ニュース", "n_contact": "お問い合わせ", "ft": "© 2026 株式会社エナーインフラ", "ftaddr": "韓国 京畿道南楊州市梧南邑ジンゴンオナム路516-38", "cta_h": "導入や協業について、お話ししたいです。", "cta_p": "製品導入、実証への参加、海外パートナーシップを歓迎します。", "cta_b": "お問い合わせ", "h1": "ニュース", "h1p": "会社と製品の進捗を記録します。", "g1": "COMPANY", "n1h": "株式会社エナーインフラ設立", "n1p": "韓国・京畿道南楊州市に法人を設立し、事業を開始しました。", "g2": "PROGRAM", "n2h": "環境部エコスタートアップ2026に採択", "n2p": "創業前の段階でPOWERBOARD試作機の開発・実証事業に採択されました。", "g3": "PRODUCT", "n3h": "POWERBOARD試作機3セット完成", "n3p": "二次基板(R02)と筐体モックアップを適用した動作試作機が完成しました。", "g5": "COMPANY", "n5h": "慶福大学校 創業保育センターに入居", "n5p": "南楊州キャンパス忠孝館にオフィスと研究スペースを設けました。", "g4": "GLOBAL", "n4h": "東京でのパートナー面談", "n4p": "日本のスタートアップ支援機関およびVCと製造・実証パートナーシップを協議します。"}, "en": {"brand": "ENERINFRA", "n_product": "Product", "n_company": "Company", "n_news": "News", "n_contact": "Contact", "ft": "© 2026 EnerInfra Inc.", "ftaddr": "516-38 Jingeononam-ro, Onam-eup, Namyangju-si, Gyeonggi-do, Korea", "cta_h": "Let's talk about deployment and partnership.", "cta_p": "Product deployment, field trials and overseas partnerships are all welcome.", "cta_b": "Contact us", "h1": "News", "h1p": "Progress of the company and the product.", "g1": "COMPANY", "n1h": "EnerInfra Inc. founded", "n1p": "Incorporated in Namyangju, Gyeonggi-do, Korea.", "g2": "PROGRAM", "n2h": "Selected for Eco-Startup 2026", "n2p": "Selected pre-incorporation for POWERBOARD prototype development and validation.", "g3": "PRODUCT", "n3h": "Three POWERBOARD prototype sets completed", "n3p": "Working prototypes with the R02 board and enclosure mock-up.", "g5": "COMPANY", "n5h": "Moved into Kyungbok University incubator", "n5p": "Office and lab space established at the Namyangju campus.", "g4": "GLOBAL", "n4h": "Partner meetings in Tokyo", "n4p": "Manufacturing and demonstration partnerships discussed with Tokyo startup support bodies and VCs."}};
+const I18N={"ko": {"brand": "에너인프라", "n_product": "제품", "n_company": "회사소개", "n_news": "소식", "n_contact": "문의", "ft": "© 2026 주식회사 에너인프라", "ftaddr": "경기도 남양주시 오남읍 진건오남로 516-38, 나동 4층 401호", "cta_h": "도입과 협업을 이야기하고 싶습니다.", "cta_p": "제품 도입, 실증 참여, 해외 파트너십 모두 환영합니다.", "cta_b": "문의하기", "h1": "소식", "h1p": "회사와 제품의 진행 상황을 기록합니다.", "g1": "COMPANY", "n1h": "㈜에너인프라 설립", "n1p": "경기도 남양주에 법인을 설립하고 사업을 시작했습니다.", "g2": "PROGRAM", "n2h": "환경부 에코스타트업 2026 선정", "n2p": "예비창업자 신분으로 POWERBOARD 시제품 개발·실증 과제에 선정되었습니다.", "g3": "PRODUCT", "n3h": "POWERBOARD 시제품 3세트 완성", "n3p": "2차 기판(R02)과 케이스 목업을 적용한 동작 시제품이 완성되었습니다.", "g5": "COMPANY", "n5h": "경복대학교 창업보육센터 입주", "n5p": "남양주캠퍼스 충효관에 사무실과 연구공간을 마련했습니다.", "g4": "GLOBAL", "n4h": "도쿄 파트너 미팅 진행", "n4p": "일본 스타트업 지원기관 및 벤처캐피털과 제조·실증 파트너십을 논의합니다.", "g6": "COMPANY", "n6h": "대표 유완재, KIMST 국민참여혁신단 위원 위촉", "n6p": "해양수산과학기술진흥원(KIMST) 2026년도 국민참여혁신단 위원으로 위촉되어 R&D 사업 운영과 환경·지역상생 분야를 자문합니다."}, "ja": {"brand": "エナーインフラ", "n_product": "製品", "n_company": "会社紹介", "n_news": "ニュース", "n_contact": "お問い合わせ", "ft": "© 2026 株式会社エナーインフラ", "ftaddr": "韓国 京畿道南楊州市梧南邑ジンゴンオナム路516-38", "cta_h": "導入や協業について、お話ししたいです。", "cta_p": "製品導入、実証への参加、海外パートナーシップを歓迎します。", "cta_b": "お問い合わせ", "h1": "ニュース", "h1p": "会社と製品の進捗を記録します。", "g1": "COMPANY", "n1h": "株式会社エナーインフラ設立", "n1p": "韓国・京畿道南楊州市に法人を設立し、事業を開始しました。", "g2": "PROGRAM", "n2h": "環境部エコスタートアップ2026に採択", "n2p": "創業前の段階でPOWERBOARD試作機の開発・実証事業に採択されました。", "g3": "PRODUCT", "n3h": "POWERBOARD試作機3セット完成", "n3p": "二次基板(R02)と筐体モックアップを適用した動作試作機が完成しました。", "g5": "COMPANY", "n5h": "慶福大学校 創業保育センターに入居", "n5p": "南楊州キャンパス忠孝館にオフィスと研究スペースを設けました。", "g4": "GLOBAL", "n4h": "東京でのパートナー面談", "n4p": "日本のスタートアップ支援機関およびVCと製造・実証パートナーシップを協議します。", "g6": "COMPANY", "n6h": "代表ユ・ワンジェ、KIMST国民参加革新団委員に委嘱", "n6p": "韓国海洋水産科学技術振興院(KIMST)の2026年度国民参加革新団委員に委嘱され、R&D事業運営と環境・地域共生分野を助言します。"}, "en": {"brand": "ENERINFRA", "n_product": "Product", "n_company": "Company", "n_news": "News", "n_contact": "Contact", "ft": "© 2026 EnerInfra Inc.", "ftaddr": "516-38 Jingeononam-ro, Onam-eup, Namyangju-si, Gyeonggi-do, Korea", "cta_h": "Let's talk about deployment and partnership.", "cta_p": "Product deployment, field trials and overseas partnerships are all welcome.", "cta_b": "Contact us", "h1": "News", "h1p": "Progress of the company and the product.", "g1": "COMPANY", "n1h": "EnerInfra Inc. founded", "n1p": "Incorporated in Namyangju, Gyeonggi-do, Korea.", "g2": "PROGRAM", "n2h": "Selected for Eco-Startup 2026", "n2p": "Selected pre-incorporation for POWERBOARD prototype development and validation.", "g3": "PRODUCT", "n3h": "Three POWERBOARD prototype sets completed", "n3p": "Working prototypes with the R02 board and enclosure mock-up.", "g5": "COMPANY", "n5h": "Moved into Kyungbok University incubator", "n5p": "Office and lab space established at the Namyangju campus.", "g4": "GLOBAL", "n4h": "Partner meetings in Tokyo", "n4p": "Manufacturing and demonstration partnerships discussed with Tokyo startup support bodies and VCs.", "g6": "COMPANY", "n6h": "CEO appointed to KIMST citizen innovation panel", "n6p": "Wan Jae Yoo joins the 2026 Citizen Innovation Panel of the Korea Institute of Marine Science & Technology Promotion (KIMST), advising on R&D programme operation and environmental and regional issues."}};
 
 
 const P=new URLSearchParams(location.search);

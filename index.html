@@ -12,13 +12,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="only light">
+<meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff">
 <title>POWERBOARD | ㈜에너인프라</title>
 <meta name="description" content="분전반 커버를 바꾸면 전기가 보입니다. 공사 없이, 앱 없이, 항상.">
+<script type="module" src="https://unpkg.com/@google/model-viewer@3/dist/model-viewer.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
-html{color-scheme:only light}
+html{color-scheme:light dark;background:#fff}
 :root{
   --bg:#F5F6F8;--bg2:#FFFFFF;--dark:#0E1B33;--dark2:#111A2B;
   --ink:#0F141C;--ink2:#5D6674;--ink3:#8B939F;
@@ -211,6 +212,28 @@ footer{background:#EEF0F3;color:var(--ink3);font-size:12px;padding:26px 0;border
   *{animation:none!important;transition:none!important}
   .rv{opacity:1;transform:none}
 }
+@media (prefers-color-scheme: dark){html,body{background:#fff}}
+@media (min-width:1000px){body{zoom:1.12}}
+.nav a{font-size:14px}.hero{padding-bottom:40px}.scene{padding:88px 0}.cta{padding:80px 5vw}
+.caps4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}@media(max-width:900px){.caps4{grid-template-columns:1fr 1fr}}@media(max-width:520px){.caps4{grid-template-columns:1fr}}
+
+/* ---------- scroll-driven 3D hero ---------- */
+.hero3d{height:260vh;background:#fff;position:relative}
+.hero3d .sticky{position:sticky;top:0;height:100vh;display:grid;grid-template-rows:56px 1fr auto;overflow:hidden}
+.hero3d .stage{grid-row:2;position:relative;width:min(1120px,92vw);margin:0 auto;height:100%}
+.hero3d model-viewer{position:absolute;inset:0;width:100%;height:100%;--poster-color:transparent;background:transparent;transition:opacity .25s}
+.hero3d .proto{position:absolute;inset:0;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(.86);pointer-events:none}
+.hero3d .proto img{max-width:min(720px,82vw);max-height:54vh;object-fit:contain;filter:drop-shadow(0 30px 40px rgba(14,27,51,.18))}
+.hero3d .proto figcaption{margin-top:14px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--ink3)}
+.hero3d .copy{grid-row:3;text-align:center;padding:0 5vw 48px}
+.hero3d .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--amber);margin-bottom:14px}
+.hero3d h1{font-size:clamp(30px,5.2vw,64px);font-weight:850;letter-spacing:-.045em;line-height:1.08;max-width:20ch;margin:0 auto;opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s}
+.hero3d .sub{margin:14px auto 0;font-size:clamp(15px,1.5vw,19px);color:var(--ink2);max-width:46ch;opacity:0;transform:translateY(14px);transition:opacity .5s .08s,transform .5s .08s}
+.hero3d.on h1,.hero3d.on .sub{opacity:1;transform:none}
+.hero3d .hint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--ink3);animation:hint 1.8s infinite}
+@keyframes hint{0%,100%{opacity:.35}50%{opacity:1}}
+@media(max-width:720px){.hero3d{height:220vh}.hero3d .proto img{max-height:42vh}}
+@media(prefers-reduced-motion:reduce){.hero3d{height:auto}.hero3d .sticky{position:static;height:auto}.hero3d .stage{height:52vh}.hero3d h1,.hero3d .sub{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -218,7 +241,7 @@ footer{background:#EEF0F3;color:var(--ink3);font-size:12px;padding:26px 0;border
 <header class="top" id="top">
   <div class="wrap top-in">
     <a href="index.html" class="brand">
-      <svg viewBox="0 0 250 40" aria-hidden="true" style="width:auto;height:22px"><rect x="0" y="12" width="14" height="4" rx="2" fill="#14346E"/><rect x="0" y="24" width="14" height="4" rx="2" fill="#14346E"/><rect x="16" y="2" width="36" height="36" rx="8" fill="#F2A31B"/><text x="62" y="32" font-family="Pretendard Variable,Pretendard,'Noto Sans KR','Noto Sans JP',sans-serif" font-weight="900" font-size="34" letter-spacing="-1" fill="#14346E">ENERINFRA</text></svg>
+      <svg viewBox="0 0 220 40" aria-hidden="true" style="width:auto;height:24px"><rect x="0" y="11" width="12" height="4" rx="2" fill="#F2A31B"/><rect x="0" y="25" width="12" height="4" rx="2" fill="#F2A31B"/><rect x="16" y="2" width="200" height="36" rx="9" fill="#F2A31B"/><path d="M110 2h97a9 9 0 0 1 9 9v18a9 9 0 0 1-9 9h-97z" fill="#14346E"/><text x="27" y="30" font-family="Pretendard Variable,Pretendard,'Noto Sans KR','Noto Sans JP',sans-serif" font-weight="900" font-size="27" letter-spacing="-0.5" fill="#14346E">ENER</text><text x="118" y="30" font-family="Pretendard Variable,Pretendard,'Noto Sans KR','Noto Sans JP',sans-serif" font-weight="900" font-size="27" letter-spacing="-0.5" fill="#F2A31B">INFRA</text></svg>
     </a>
     <nav class="nav" id="nav">
       <a href="product.html" data-t="np">제품</a>
@@ -236,36 +259,19 @@ footer{background:#EEF0F3;color:var(--ink3);font-size:12px;padding:26px 0;border
 </header>
 
 <!-- ============ HERO ============ -->
-<section class="hero" id="hero">
-  <div class="kicker">POWERBOARD · SEE IT. SAVE IT.</div>
-  <h1 data-t="h1"></h1>
-  <p class="sub" data-t="h1s"></p>
-  <div class="ctas">
-    <a href="product.html" class="btn btn-amber" data-t="c1">자세히 보기</a>
-    <a href="contact.html" class="btn btn-line" data-t="c2">문의하기</a>
-  </div>
-  <div class="hero-product">
-    <div class="hero-glow"></div>
-    <div class="panel">
-      <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
-      <div class="bks"><div class="bk on"></div><div class="bk on"></div><div class="bk"></div><div class="bk on"></div><div class="bk on"></div><div class="bk"></div></div>
-      <div class="lcd">
-        <div class="lcd-top"><span class="lcd-brand">POWERBOARD</span><span class="lcd-tag">DEMO</span></div>
-        <div class="lcd-label" data-t="l1">현재 사용 전력</div>
-        <div class="readout"><span class="v" id="vMain">2.41</span><span class="u">kW</span></div>
-        <div class="cells">
-          <div class="cell amb"><div class="k" data-t="l2">이번 달 누적</div><div class="v" id="vMon">265 kWh</div></div>
-          <div class="cell gen"><div class="k" data-t="l3">태양광 (예정)</div><div class="v" id="vGen">1.32 kW</div></div>
-        </div>
-        <div class="gauge">
-          <div class="k"><span data-t="l4">이번 달 예상 요금</span><span class="mono" id="vBill">₩ 48,200</span></div>
-          <div class="bar"><i id="gFill" style="width:52%"></i></div>
-          <div class="marks"><span>0</span><span>200</span><span>400</span><span>kWh</span></div>
-        </div>
-      </div>
+<section class="hero3d" id="hero">
+  <div class="sticky">
+    <div class="stage">
+      <model-viewer id="mv" src="meet/powerboard.glb" alt="POWERBOARD" camera-orbit="-40deg 82deg 110%" min-camera-orbit="auto auto 60%" max-camera-orbit="auto auto 150%" field-of-view="26deg" interaction-prompt="none" disable-zoom disable-pan shadow-intensity="1.2" shadow-softness="0.8" exposure="1.05" environment-image="neutral"></model-viewer>
+      <figure class="proto"><img src="img/prototype.jpg" alt="POWERBOARD prototype R02"><figcaption data-t="proto"></figcaption></figure>
     </div>
+    <div class="copy">
+      <div class="kicker">POWERBOARD · SEE IT. SAVE IT.</div>
+      <h1 data-t="h1"></h1>
+      <p class="sub" data-t="h1s"></p>
+    </div>
+    <div class="hint" aria-hidden="true">SCROLL</div>
   </div>
-  <div class="scroll-hint">SCROLL</div>
 </section>
 
 <!-- ============ 서브 내비 ============ -->
@@ -440,7 +446,7 @@ ko:{
  np:'제품',nc:'회사소개',nn:'소식',nq:'문의',
  brand:'에너인프라',n1:'설치',n2:'기능',n3:'사양',n4:'일본',n5:'회사',
  h1:'분전반 커버를 바꾸면,<br>전기가 보입니다.',
- h1s:'POWERBOARD는 지금 쓰는 전력과 이번 달 예상 요금을 분전반 위에 항상 켜 둡니다. 공사 없이, 앱 없이.',
+ h1s:'POWERBOARD는 지금 쓰는 전력과 이번 달 예상 요금을 분전반 위에 항상 켜 둡니다. 공사 없이, 앱 없이.', proto:'시제품 R02 · 4.3인치 화면 · 실제 동작 사진',
  c1:'자세히 보기',c2:'문의하기',
  l1:'현재 사용 전력',l2:'이번 달 누적',l3:'태양광 (예정)',l4:'이번 달 예상 요금',
  s1k:'INSTALLATION',s1h:'커버 하나 바꾸는 시간이면 됩니다.',
@@ -479,7 +485,7 @@ ja:{
  np:'製品',nc:'会社紹介',nn:'ニュース',nq:'お問い合わせ',
  brand:'エナーインフラ',n1:'設置',n2:'機能',n3:'仕様',n4:'日本',n5:'会社',
  h1:'分電盤のカバーを替えると、<br>電気が見えます。',
- h1s:'POWERBOARDは、今の消費電力と太陽光の発電量を分電盤の上に常時表示します。工事なし、アプリなし。',
+ h1s:'POWERBOARDは、今の消費電力と太陽光の発電量を分電盤の上に常時表示します。工事なし、アプリなし。', proto:'試作機R02 · 4.3インチ画面 · 実機の動作写真',
  c1:'詳しく見る',c2:'お問い合わせ',
  l1:'現在の消費電力',l2:'今月の累計',l3:'太陽光（予定）',l4:'今月の予想電気代',
  s1k:'INSTALLATION',s1h:'カバーを一枚替える時間で済みます。',
@@ -518,7 +524,7 @@ en:{
  np:'Product',nc:'Company',nn:'News',nq:'Contact',
  brand:'ENER INFRA',n1:'Install',n2:'Features',n3:'Specs',n4:'Japan',n5:'Company',
  h1:'Change the panel cover.<br>See your electricity.',
- h1s:'POWERBOARD keeps your live consumption and projected bill on the breaker panel, always on. No rewiring, no app.',
+ h1s:'POWERBOARD keeps your live consumption and projected bill on the breaker panel, always on. No rewiring, no app.', proto:'Prototype R02 · 4.3-inch display · photo of the working unit',
  c1:'Learn more',c2:'Contact',
  l1:'Current load',l2:'This month',l3:'Solar (planned)',l4:'Projected bill',
  s1k:'INSTALLATION',s1h:'It takes as long as changing a cover.',
@@ -585,21 +591,34 @@ for(let i=0;i<6;i++){
 /* 데모 값 */
 let mon=265;
 function tick(){
+  const set=(id,v)=>{const el=document.getElementById(id); if(el) el.textContent=v;};
   const load=1.7+Math.random()*1.6, gen=0.9+Math.random()*0.9; mon+=0.01;
   const d=I18N[LANG];
-  document.getElementById('vMain').textContent=load.toFixed(2);
-  document.getElementById('vMon').textContent=Math.round(mon)+' kWh';
-  document.getElementById('vGen').textContent=gen.toFixed(2)+' kW';
-  document.getElementById('svgKw').textContent=load.toFixed(2)+' kW';
-  document.getElementById('jGen').textContent=gen.toFixed(2);
-  document.getElementById('jUse').textContent=load.toFixed(2);
+  set('vMain',load.toFixed(2));
+  set('vMon',Math.round(mon)+' kWh');
+  set('vGen',gen.toFixed(2)+' kW');
+  set('svgKw',load.toFixed(2)+' kW');
+  set('jGen',gen.toFixed(2));
+  set('jUse',load.toFixed(2));
   const pct=Math.min(96,mon/500*100);
-  document.getElementById('gFill').style.width=pct+'%';
+  {const g=document.getElementById('gFill'); if(g) g.style.width=pct+'%';}
   const bill=Math.round(d.billBase*(0.9+load/12));
-  document.getElementById('vBill').textContent=d.cur+' '+bill.toLocaleString();
+  set('vBill',d.cur+' '+bill.toLocaleString());
 }
 
 /* 스크롤 등장 · 헤더 색 · 서브내비 하이라이트 */
+(function(){
+  const sec=document.getElementById('hero'), mv=document.getElementById('mv'), pr=document.querySelector('.hero3d .proto'); if(!sec||!mv) return;
+  const lerp=(a,b,t)=>a+(b-a)*t, clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  function step(){
+    const r=sec.getBoundingClientRect(), total=sec.offsetHeight-innerHeight, p=clamp(-r.top/total,0,1);
+    const a=clamp(p/0.6,0,1), b=clamp((p-0.55)/0.35,0,1);
+    mv.cameraOrbit=`${lerp(-40,32,a)}deg ${lerp(82,70,a)}deg ${lerp(110,88,a)}%`;
+    mv.style.opacity=1-b; pr.style.opacity=b; pr.style.transform=`scale(${lerp(.86,1,b)})`;
+    sec.classList.toggle('on',p>0.08);
+  }
+  addEventListener('scroll',step,{passive:true}); addEventListener('resize',step); step();
+})();
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 

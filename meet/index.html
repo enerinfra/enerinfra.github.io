@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="only light">
+<meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff">
 <title>EnerInfra — POWERBOARD</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 <style>
-html{color-scheme:only light;background:#fff}
+html{color-scheme:light dark;background:#fff}
 :root{--navy:#0E1B33;--amber:#F2A31B;--ink:#1c1c1e;--muted:#5b6170;--paper:#ffffff;--line:#e4e6ec}
 *{box-sizing:border-box}body{margin:0;font-family:"Noto Sans JP","Noto Sans KR",system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.75}
 main{max-width:640px;margin:0 auto;padding:24px 20px 80px}
@@ -27,6 +27,7 @@ h2{font-size:18px;margin:36px 0 10px;color:var(--navy)}ul{padding-left:20px;marg
 .nav a small{display:block;font-weight:400;color:var(--muted);font-size:13px}
 [hidden]{display:none!important}
 footer{margin-top:48px;color:var(--muted);font-size:14px}
+@media (prefers-color-scheme: dark){html,body{background:#fff}}
 </style>
 </head>
 <body>

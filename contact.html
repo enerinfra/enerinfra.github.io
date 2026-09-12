@@ -2,12 +2,12 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="only light">
+<meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff">
 <title>문의 | ㈜에너인프라</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
-html{color-scheme:only light}
+html{color-scheme:light dark;background:#fff}
 :root{
   --bg:#F5F6F8;--bg2:#FFFFFF;--dark:#0E1B33;--dark2:#111A2B;
   --ink:#0F141C;--ink2:#5D6674;--ink3:#8B939F;
@@ -266,13 +266,17 @@ footer{background:#EEF0F3;color:var(--ink3);font-size:12px;padding:26px 0;border
 .map{background:#E3E7EC;border-radius:14px;height:260px;display:grid;place-items:center;color:var(--ink3);font-size:13px;text-align:center;padding:20px}
 @media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr}.types{grid-template-columns:1fr 1fr}.news a{grid-template-columns:1fr;gap:6px}}
 
-.nav a.on{opacity:1;font-weight:700;color:var(--navy)}</style>
+.nav a.on{opacity:1;font-weight:700;color:var(--navy)}@media (prefers-color-scheme: dark){html,body{background:#fff}}
+@media (min-width:1000px){body{zoom:1.12}}
+.nav a{font-size:14px}.hero{padding-bottom:40px}.scene{padding:88px 0}.cta{padding:80px 5vw}
+.caps4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}@media(max-width:900px){.caps4{grid-template-columns:1fr 1fr}}@media(max-width:520px){.caps4{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <header class="top" id="top">
   <div class="wrap top-in">
     <a href="index.html" class="brand">
-      <svg viewBox="0 0 250 40" aria-hidden="true" style="width:auto;height:22px"><rect x="0" y="12" width="14" height="4" rx="2" fill="#14346E"/><rect x="0" y="24" width="14" height="4" rx="2" fill="#14346E"/><rect x="16" y="2" width="36" height="36" rx="8" fill="#F2A31B"/><text x="62" y="32" font-family="Pretendard Variable,Pretendard,'Noto Sans KR','Noto Sans JP',sans-serif" font-weight="900" font-size="34" letter-spacing="-1" fill="#14346E">ENERINFRA</text></svg>
+      <svg viewBox="0 0 220 40" aria-hidden="true" style="width:auto;height:24px"><rect x="0" y="11" width="12" height="4" rx="2" fill="#F2A31B"/><rect x="0" y="25" width="12" height="4" rx="2" fill="#F2A31B"/><rect x="16" y="2" width="200" height="36" rx="9" fill="#F2A31B"/><path d="M110 2h97a9 9 0 0 1 9 9v18a9 9 0 0 1-9 9h-97z" fill="#14346E"/><text x="27" y="30" font-family="Pretendard Variable,Pretendard,'Noto Sans KR','Noto Sans JP',sans-serif" font-weight="900" font-size="27" letter-spacing="-0.5" fill="#14346E">ENER</text><text x="118" y="30" font-family="Pretendard Variable,Pretendard,'Noto Sans KR','Noto Sans JP',sans-serif" font-weight="900" font-size="27" letter-spacing="-0.5" fill="#F2A31B">INFRA</text></svg>
     </a>
     <nav class="nav" id="nav">
       <a href="product.html" data-t="n_product"></a>
