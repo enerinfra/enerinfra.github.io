@@ -179,8 +179,8 @@ footer{background:#EEF0F3;color:var(--ink3);font-size:12px;padding:26px 0;border
 .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 /* 등장 애니메이션 */
-.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
-.rv.in{opacity:1;transform:none}
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.js .rv.in{opacity:1;transform:none}
 
 @media(max-width:900px){
   .steps,.tri,.circuits,.dual,.co{grid-template-columns:1fr}
@@ -266,10 +266,83 @@ footer{background:#EEF0F3;color:var(--ink3);font-size:12px;padding:26px 0;border
 .map{background:#E3E7EC;border-radius:14px;height:260px;display:grid;place-items:center;color:var(--ink3);font-size:13px;text-align:center;padding:20px}
 @media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr}.types{grid-template-columns:1fr 1fr}.news a{grid-template-columns:1fr;gap:6px}}
 
-.nav a.on{opacity:1;font-weight:700;color:var(--navy)}@media (prefers-color-scheme: dark){html,body{background:#fff}}
-@media (min-width:1000px){body{zoom:1.12}}
+.nav a.on{opacity:1;font-weight:700;color:var(--navy)}@media (min-width:1000px){body{zoom:1.12}}
 .nav a{font-size:14px}.hero{padding-bottom:40px}.scene{padding:88px 0}.cta{padding:80px 5vw}
 .caps4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}@media(max-width:900px){.caps4{grid-template-columns:1fr 1fr}}@media(max-width:520px){.caps4{grid-template-columns:1fr}}
+
+/* ---- designed dark theme (used only when the device is in dark mode; stops browsers from force-inverting the page) ---- */
+@media (prefers-color-scheme: dark){
+  html{color-scheme:dark}
+  :root{--bg:#0E1B33;--bg2:#13233F;--ink:#F3F5F9;--ink2:#B8C0CE;--ink3:#8B939F;--line:rgba(255,255,255,.12);--navy:#9FBCF2}
+  html,body{background:#0E1B33;color:#F3F5F9}
+  .top,.subnav,.nav.open{background:rgba(14,27,51,.92)}
+  .scene.dark{background:#13233F;color:#F3F5F9}
+  .scene.white{background:#0E1B33}
+  .btn-line,.step,.fcard,.chip,.tl2>div,.faq details,.types label,.card,.kcard,.co .box,.qa,.spec tr td,input,textarea,select{background:#13233F;color:#F3F5F9;border-color:rgba(255,255,255,.12)}
+  .hero3d,.hero{background:#0E1B33}
+  .hero3d .proto img{filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))}
+  img.doc,.lcd-frame{filter:none}
+}
+
+/* ================= Apple-style visual polish layer (light, no black bg) ================= */
+:root{
+  --shadow-sm:0 1px 2px rgba(15,20,28,.04),0 1px 1px rgba(15,20,28,.03);
+  --shadow-md:0 10px 30px -10px rgba(15,20,28,.12),0 2px 8px rgba(15,20,28,.05);
+  --shadow-lg:0 30px 60px -20px rgba(15,20,28,.18),0 8px 24px rgba(15,20,28,.06);
+  --ease:cubic-bezier(.22,.9,.35,1);
+  --grad-amber:linear-gradient(135deg,#F2A31B 0%,#F5B93F 100%);
+  --grad-navy:linear-gradient(135deg,#14346E 0%,#0E1B33 100%);
+}
+@media (prefers-color-scheme: dark){
+  :root{--shadow-sm:0 1px 2px rgba(0,0,0,.3);--shadow-md:0 10px 30px -10px rgba(0,0,0,.45);--shadow-lg:0 30px 60px -20px rgba(0,0,0,.55)}
+}
+html{scroll-behavior:smooth}
+body{letter-spacing:-.005em}
+/* section rhythm: generous, uneven top/bottom like Apple's editorial pacing */
+.scene{padding:120px 0 128px}
+.scene-head{margin-bottom:64px}
+.scene-head h2{background:linear-gradient(180deg,var(--ink) 0%,var(--ink2) 130%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+@media (prefers-color-scheme: dark){.scene-head h2{background:linear-gradient(180deg,#fff 0%,#B8C0CE 160%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}}
+/* cards: soft elevation + lift on hover, rounder corners, subtle top highlight */
+.step,.fcard,.card,.kcard,.tl2>div,.co .box,.qa{
+  box-shadow:var(--shadow-sm);border-radius:20px!important;
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s var(--ease);
+  position:relative;overflow:hidden;
+}
+.step::before,.fcard::before,.card::before{content:'';position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);opacity:.8}
+.step:hover,.fcard:hover,.card:hover,.kcard:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:rgba(20,52,110,.18)}
+/* buttons: real depth + press feedback, amber gets a soft glow */
+.btn{border-radius:999px!important;box-shadow:var(--shadow-sm);transition:transform .28s var(--ease),box-shadow .28s var(--ease),filter .28s var(--ease)}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);filter:brightness(1.03)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn.solid,.btn.primary,a.btn:not(.btn-line){background:var(--grad-navy)}
+.btn.amber,.btn[class*="cta"]{background:var(--grad-amber);box-shadow:0 10px 26px -10px rgba(242,163,27,.55)}
+.btn.amber:hover{box-shadow:0 16px 34px -10px rgba(242,163,27,.65)}
+/* chips */
+.chip{transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease);box-shadow:var(--shadow-sm)}
+.chip:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+/* top nav: frosted glass, slight elevation on scroll */
+.top,.subnav{backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4)}
+/* section dividers: faint gradient line instead of hard border */
+.scene+.scene,.scene+section,section+.scene{position:relative}
+.scene::after{content:'';display:block;position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--line) 20%,var(--line) 80%,transparent)}
+/* numbers / stats: tighter tracking, gradient accent on the unit */
+.strip .big{background:linear-gradient(180deg,var(--ink),var(--ink2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+/* headline: refined weight + tighter leading like Apple's hero type */
+.hero3d h1,.hero h1{font-weight:700;letter-spacing:-.05em}
+.kicker{position:relative;display:inline-block}
+.kicker::after{content:'';position:absolute;left:0;right:0;bottom:-8px;height:2px;background:var(--grad-amber);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease)}
+.hero3d.on .kicker::after,.hero.on .kicker::after{transform:scaleX(1)}
+/* images: soft rounded frame + shadow so photos feel like objects, not flat pixels */
+.hero3d .proto img,img.doc,.lcd-frame{border-radius:18px;box-shadow:var(--shadow-lg)}
+/* faq / accordions: smoother open, soft highlight on the row */
+.faq details{border-radius:16px!important;transition:background .3s var(--ease)}
+.faq details[open]{background:rgba(20,52,110,.03)}
+@media (prefers-color-scheme: dark){.faq details[open]{background:rgba(159,188,242,.06)}}
+.faq summary{transition:padding-left .25s var(--ease)}
+.faq details[open] summary{padding-left:6px}
+/* mobile: slightly tighter section padding so it doesn't feel empty on small screens */
+@media(max-width:720px){.scene{padding:80px 0 84px}.scene-head{margin-bottom:40px}}
 </style>
 </head>
 <body>
@@ -316,6 +389,8 @@ footer{background:#EEF0F3;color:var(--ink3);font-size:12px;padding:26px 0;border
   </div>
 </footer>
 <script>
+try{ if("IntersectionObserver" in window){ document.documentElement.classList.add("js"); const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{threshold:.1}); addEventListener("DOMContentLoaded",()=>document.querySelectorAll(".rv").forEach(el=>io.observe(el))); } }catch(e){}
+
 const I18N={"ko": {"brand": "에너인프라", "n_product": "제품", "n_company": "회사소개", "n_news": "소식", "n_contact": "문의", "ft": "© 2026 주식회사 에너인프라", "ftaddr": "경기도 남양주시 오남읍 진건오남로 516-38, 나동 4층 401호", "cta_h": "도입과 협업을 이야기하고 싶습니다.", "cta_p": "제품 도입, 실증 참여, 해외 파트너십 모두 환영합니다.", "cta_b": "문의하기", "h1": "소식", "h1p": "회사와 제품의 진행 상황을 기록합니다.", "g1": "COMPANY", "n1h": "㈜에너인프라 설립", "n1p": "경기도 남양주에 법인을 설립하고 사업을 시작했습니다.", "g2": "PROGRAM", "n2h": "환경부 에코스타트업 2026 선정", "n2p": "예비창업자 신분으로 POWERBOARD 시제품 개발·실증 과제에 선정되었습니다.", "g3": "PRODUCT", "n3h": "POWERBOARD 시제품 3세트 완성", "n3p": "2차 기판(R02)과 케이스 목업을 적용한 동작 시제품이 완성되었습니다.", "g5": "COMPANY", "n5h": "경복대학교 창업보육센터 입주", "n5p": "남양주캠퍼스 충효관에 사무실과 연구공간을 마련했습니다.", "g4": "GLOBAL", "n4h": "도쿄 파트너 미팅 진행", "n4p": "일본 스타트업 지원기관 및 벤처캐피털과 제조·실증 파트너십을 논의합니다.", "g6": "COMPANY", "n6h": "대표 유완재, KIMST 국민참여혁신단 위원 위촉", "n6p": "해양수산과학기술진흥원(KIMST) 2026년도 국민참여혁신단 위원으로 위촉되어 R&D 사업 운영과 환경·지역상생 분야를 자문합니다."}, "ja": {"brand": "エナーインフラ", "n_product": "製品", "n_company": "会社紹介", "n_news": "ニュース", "n_contact": "お問い合わせ", "ft": "© 2026 株式会社エナーインフラ", "ftaddr": "韓国 京畿道南楊州市梧南邑ジンゴンオナム路516-38", "cta_h": "導入や協業について、お話ししたいです。", "cta_p": "製品導入、実証への参加、海外パートナーシップを歓迎します。", "cta_b": "お問い合わせ", "h1": "ニュース", "h1p": "会社と製品の進捗を記録します。", "g1": "COMPANY", "n1h": "株式会社エナーインフラ設立", "n1p": "韓国・京畿道南楊州市に法人を設立し、事業を開始しました。", "g2": "PROGRAM", "n2h": "環境部エコスタートアップ2026に採択", "n2p": "創業前の段階でPOWERBOARD試作機の開発・実証事業に採択されました。", "g3": "PRODUCT", "n3h": "POWERBOARD試作機3セット完成", "n3p": "二次基板(R02)と筐体モックアップを適用した動作試作機が完成しました。", "g5": "COMPANY", "n5h": "慶福大学校 創業保育センターに入居", "n5p": "南楊州キャンパス忠孝館にオフィスと研究スペースを設けました。", "g4": "GLOBAL", "n4h": "東京でのパートナー面談", "n4p": "日本のスタートアップ支援機関およびVCと製造・実証パートナーシップを協議します。", "g6": "COMPANY", "n6h": "代表ユ・ワンジェ、KIMST国民参加革新団委員に委嘱", "n6p": "韓国海洋水産科学技術振興院(KIMST)の2026年度国民参加革新団委員に委嘱され、R&D事業運営と環境・地域共生分野を助言します。"}, "en": {"brand": "ENERINFRA", "n_product": "Product", "n_company": "Company", "n_news": "News", "n_contact": "Contact", "ft": "© 2026 EnerInfra Inc.", "ftaddr": "516-38 Jingeononam-ro, Onam-eup, Namyangju-si, Gyeonggi-do, Korea", "cta_h": "Let's talk about deployment and partnership.", "cta_p": "Product deployment, field trials and overseas partnerships are all welcome.", "cta_b": "Contact us", "h1": "News", "h1p": "Progress of the company and the product.", "g1": "COMPANY", "n1h": "EnerInfra Inc. founded", "n1p": "Incorporated in Namyangju, Gyeonggi-do, Korea.", "g2": "PROGRAM", "n2h": "Selected for Eco-Startup 2026", "n2p": "Selected pre-incorporation for POWERBOARD prototype development and validation.", "g3": "PRODUCT", "n3h": "Three POWERBOARD prototype sets completed", "n3p": "Working prototypes with the R02 board and enclosure mock-up.", "g5": "COMPANY", "n5h": "Moved into Kyungbok University incubator", "n5p": "Office and lab space established at the Namyangju campus.", "g4": "GLOBAL", "n4h": "Partner meetings in Tokyo", "n4p": "Manufacturing and demonstration partnerships discussed with Tokyo startup support bodies and VCs.", "g6": "COMPANY", "n6h": "CEO appointed to KIMST citizen innovation panel", "n6p": "Wan Jae Yoo joins the 2026 Citizen Innovation Panel of the Korea Institute of Marine Science & Technology Promotion (KIMST), advising on R&D programme operation and environmental and regional issues."}};
 
 
@@ -335,7 +410,7 @@ document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',
 document.getElementById('burger').addEventListener('click',()=>document.getElementById('nav').classList.toggle('open'));
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
-apply(LANG);
+try{apply(LANG);}catch(e){console.warn(e);}
 
 </script>
 </body></html>
