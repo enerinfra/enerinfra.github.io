@@ -307,6 +307,20 @@ body{letter-spacing:-.005em}
 .faq details[open] summary{padding-left:6px}
 /* mobile: slightly tighter section padding so it doesn't feel empty on small screens */
 @media(max-width:720px){.scene{padding:80px 0 84px}.scene-head{margin-bottom:40px}}
+
+/* --- readable CTA button on the dark closing band --- */
+.cta .btn,.cta a.btn,.cta .btn-amber{background:var(--amber)!important;color:#0E1B33!important;border-color:var(--amber)!important;font-weight:800}
+.cta .btn:hover{background:var(--amber-l)!important;color:#0E1B33!important}
+.cta .btn-line{background:transparent!important;color:#fff!important;border-color:rgba(255,255,255,.55)!important}
+/* --- roadmap chips: no clipped text, wraps cleanly on small screens --- */
+.rmap{gap:0;align-items:stretch}
+.rmap div{padding:16px 22px;min-width:max-content;white-space:nowrap;overflow:visible;border-radius:0}
+.rmap div:first-child{border-radius:14px 0 0 14px}
+.rmap div:last-child{border-radius:0 14px 14px 0}
+@media(max-width:720px){
+  .rmap{flex-direction:column;gap:10px}
+  .rmap div{white-space:normal;min-width:0;border-radius:14px!important;border-left:1px solid var(--line)!important}
+}
 </style>
 </head>
 <body>
@@ -335,7 +349,7 @@ body{letter-spacing:-.005em}
 <section class="hero3d" id="hero">
   <div class="sticky">
     <div class="stage">
-      <model-viewer id="mv" src="meet/powerboard.glb" alt="POWERBOARD" camera-orbit="-40deg 82deg 110%" min-camera-orbit="auto auto 60%" max-camera-orbit="auto auto 150%" field-of-view="26deg" interaction-prompt="none" disable-zoom disable-pan shadow-intensity="1.2" shadow-softness="0.8" exposure="1.05" environment-image="neutral"></model-viewer>
+      <model-viewer id="mv" src="meet/powerboard.glb" alt="POWERBOARD" camera-orbit="-32deg 76deg 105%" min-camera-orbit="auto auto 60%" max-camera-orbit="auto auto 150%" field-of-view="22deg" interaction-prompt="none" disable-zoom disable-pan shadow-intensity="1.6" shadow-softness="1" exposure="1.15" tone-mapping="neutral" environment-image="neutral"></model-viewer>
       <figure class="proto"><img src="img/prototype.jpg" alt="POWERBOARD prototype R02"><figcaption data-t="proto"></figcaption></figure>
     </div>
     <div class="copy">
@@ -449,7 +463,7 @@ body{letter-spacing:-.005em}
       <tr><th data-t="sp5">기판</th><td>120.00 × 74.00 mm · 2-layer</td></tr>
       <tr><th data-t="sp6">설치</th><td data-t="sp6v">분전반 커버 교체형 · 공사 불필요</td></tr>
       <tr><th data-t="sp7">연동</th><td data-t="sp7v">단독 동작 · 인터넷 불필요</td></tr>
-      <tr><th data-t="sp8">개발 단계</th><td data-t="sp8v">시제품 3세트 완성 · 실증 준비</td></tr>
+      <tr><th data-t="sp8">개발 단계</th><td data-t="sp8v">시제품 완성 · 테스트 진행 중</td></tr>
     </table>
   </div>
 </section>
@@ -487,8 +501,6 @@ body{letter-spacing:-.005em}
       <tr><th data-t="co1">상호</th><td data-t="co1v"></td></tr>
       <tr><th data-t="co2">대표자</th><td data-t="co2v"></td></tr>
       <tr><th data-t="co3">설립</th><td data-t="co3v"></td></tr>
-      <tr><th data-t="co5">사업자등록번호</th><td class="mono">449-86-04170</td></tr>
-      <tr><th data-t="co6">법인등록번호</th><td class="mono">284111-0051613</td></tr>
       <tr><th data-t="co7">소재지</th><td data-t="co7v"></td></tr>
       <tr><th data-t="co8">사업</th><td data-t="co8v"></td></tr>
     </table>
@@ -509,7 +521,7 @@ body{letter-spacing:-.005em}
 <footer>
   <div class="wrap foot">
     <span data-t="ft">© 2026 주식회사 에너인프라</span><span style="margin-left:14px;color:var(--amber);font-weight:700">See it. Save it.</span>
-    <span data-t="ftaddr">경기도 남양주시 오남읍 진건오남로 516-38, 나동 4층 401호</span>
+    <span data-t="ftaddr">경기도 남양주시 진접읍 경복대로 425-80, 경복대학교 충효관 4층 6418호</span>
   </div>
 </footer>
 
@@ -541,7 +553,7 @@ ko:{
  k1:'컬러 디스플레이',k2:'비침습 CT 계측',k3:'통신비 · 서버비',k4:'전선 절단 · 배선 공사',
  s4h:'사양',
  sp1:'제어부',sp2:'표시부',sp3:'전류 계측',sp4:'시각 기준',sp5:'기판',sp6:'설치',sp7:'연동',sp8:'개발 단계',
- sp3v:'CT 클램프 · 회로별 · 최대 100 A',sp6v:'분전반 커버 교체형 · 공사 불필요',sp7v:'단독 동작 · 인터넷 불필요',sp8v:'시제품 3세트 완성 · 실증 준비',
+ sp3v:'비침습 CT 클램프 · 전체 계측 1채널 (회로별 개발 중) · 최대 100 A',sp6v:'분전반 커버 교체형 · 공사 불필요',sp7v:'단독 동작 · 인터넷 불필요',sp8v:'시제품 완성 · 테스트 진행 중',
  s5h:'발전과 소비를 한 화면에.',
  s5p:'일본 사양은 태양광 발전량과 소비 전력을 함께 표시합니다. 도쿄전력 종량제 구간 기준으로 동작합니다.',
  d1:'발전 · 태양광',d2:'소비 · 사용',
@@ -551,9 +563,9 @@ ko:{
  s6p2:'환경부 에코스타트업(2026) 지원으로 시제품을 완성했고, 한국과 일본 양쪽에 기술·경영 자문을 두고 있습니다.',
  co1:'상호',co2:'대표자',co3:'설립',co4:'자본금',co5:'사업자등록번호',co6:'법인등록번호',co7:'소재지',co8:'사업',
  co1v:'주식회사 에너인프라',co2v:'유완재',co3v:'2026년 7월 1일',co4v:'35,000,000원',
- co7v:'경기도 남양주시 오남읍 진건오남로 516-38, 나동 4층 401호',co8v:'전력 모니터링 장치 개발·제조',
+ co7v:'경기도 남양주시 진접읍 경복대로 425-80, 경복대학교 충효관 4층 6418호',co8v:'전력 모니터링 장치 개발·제조',
  cth:'도입과 협업을 이야기하고 싶습니다.',ctp:'제품 도입, 실증 참여, 해외 파트너십 모두 환영합니다.',
- ft:'© 2026 주식회사 에너인프라',ftaddr:'경기도 남양주시 오남읍 진건오남로 516-38, 나동 4층 401호',
+ ft:'© 2026 주식회사 에너인프라',ftaddr:'경기도 남양주시 진접읍 경복대로 425-80, 경복대학교 충효관 4층 6418호',
  cur:'₩',billBase:48200,billUnit:1
 },
 ja:{
@@ -580,7 +592,7 @@ ja:{
  k1:'カラーディスプレイ',k2:'非侵襲CT計測',k3:'通信費・サーバー費',k4:'電線切断・配線工事',
  s4h:'仕様',
  sp1:'制御部',sp2:'表示部',sp3:'電流計測',sp4:'時刻基準',sp5:'基板',sp6:'設置',sp7:'連携',sp8:'開発段階',
- sp3v:'CTクランプ · 回路別 · 最大100 A',sp6v:'分電盤カバー交換型 · 工事不要',sp7v:'単独動作 · インターネット不要',sp8v:'試作機3セット完成 · 実証準備中',
+ sp3v:'CTクランプ · 回路別 · 最大100 A',sp6v:'分電盤カバー交換型 · 工事不要',sp7v:'単独動作 · インターネット不要',sp8v:'試作機完成 · テスト実施中',
  s5h:'発電と消費を、ひとつの画面に。',
  s5p:'日本仕様は太陽光の発電量と消費電力を並べて表示します。東京電力の従量電灯の段階を基準に動作します。',
  d1:'発電 · 太陽光',d2:'消費 · 使用',
@@ -590,9 +602,9 @@ ja:{
  s6p2:'韓国環境部エコスタートアップ（2026）の支援で試作機を完成させ、韓国と日本の双方に技術・経営の顧問を置いています。',
  co1:'商号',co2:'代表者',co3:'設立',co4:'資本金',co5:'事業者登録番号',co6:'法人番号',co7:'所在地',co8:'事業内容',
  co1v:'株式会社エナーインフラ',co2v:'代表取締役 ユ・ワンジェ',co3v:'2026年7月1日',co4v:'3,500万ウォン',
- co7v:'韓国 京畿道南楊州市梧南邑ジンゴンオナム路516-38 ナ棟4階401号',co8v:'電力モニタリング機器の開発・製造',
+ co7v:'韓国 京畿道南楊州市榛接邑慶福大路425-80 慶福大学校 忠孝館4階6418号',co8v:'電力モニタリング機器の開発・製造',
  cth:'導入や協業について、お話ししたいです。',ctp:'製品導入、実証への参加、海外パートナーシップを歓迎します。',
- ft:'© 2026 株式会社エナーインフラ',ftaddr:'韓国 京畿道南楊州市梧南邑ジンゴンオナム路516-38',
+ ft:'© 2026 株式会社エナーインフラ',ftaddr:'韓国 京畿道南楊州市榛接邑慶福大路425-80 慶福大学校 忠孝館4階6418号',
  cur:'¥',billBase:7400,billUnit:1
 },
 en:{
@@ -619,7 +631,7 @@ en:{
  k1:'Colour display',k2:'Non-invasive CT sensing',k3:'Connectivity & server fees',k4:'Wires cut · rewiring',
  s4h:'Specifications',
  sp1:'Controller',sp2:'Display',sp3:'Current sensing',sp4:'Time base',sp5:'Board',sp6:'Installation',sp7:'Connectivity',sp8:'Stage',
- sp3v:'CT clamps · per circuit · up to 100 A',sp6v:'Cover replacement · no rewiring',sp7v:'Standalone · no internet required',sp8v:'3 prototype sets · validation in preparation',
+ sp3v:'CT clamps · per circuit · up to 100 A',sp6v:'Cover replacement · no rewiring',sp7v:'Standalone · no internet required',sp8v:'Prototype completed · under test',
  s5h:'Generation and consumption on one screen.',
  s5p:'The Japanese version shows solar output next to consumption and follows TEPCO tariff tiers.',
  d1:'Generation · Solar',d2:'Consumption',
@@ -629,17 +641,19 @@ en:{
  s6p2:'Prototypes were completed under the Korean Ministry of Environment Eco-Startup programme (2026), with technical and business advisors in both Korea and Japan.',
  co1:'Company',co2:'CEO',co3:'Founded',co4:'Capital',co5:'Business Reg. No.',co6:'Corporate Reg. No.',co7:'Address',co8:'Business',
  co1v:'EnerInfra Inc.',co2v:'Wan Jae Yoo',co3v:'1 July 2026',co4v:'KRW 35,000,000',
- co7v:'516-38 Jingeononam-ro, Onam-eup, Namyangju-si, Gyeonggi-do, Korea',co8v:'Development and manufacture of power monitoring devices',
+ co7v:'Rm 6418, Chunghyo Hall, Kyungbok University, 425-80 Gyeongbok-daero, Namyangju-si, Gyeonggi-do 12051, Korea',co8v:'Development and manufacture of power monitoring devices',
  cth:'Let\'s talk about deployment and partnership.',ctp:'Product deployment, field trials and overseas partnerships are all welcome.',
- ft:'© 2026 EnerInfra Inc.',ftaddr:'516-38 Jingeononam-ro, Onam-eup, Namyangju-si, Gyeonggi-do, Korea',
+ ft:'© 2026 EnerInfra Inc.',ftaddr:'Rm 6418, Chunghyo Hall, Kyungbok University, 425-80 Gyeongbok-daero, Namyangju-si, Gyeonggi-do 12051, Korea',
  cur:'¥',billBase:5600,billUnit:1
 }};
 I18N.en.cur='$';I18N.en.billBase=36;
 
 const P=new URLSearchParams(location.search);
-let LANG=['ko','ja','en'].includes(P.get('lang'))?P.get('lang'):'ko';
+let LANG=['ko','ja','en'].includes(P.get('lang'))?P.get('lang'):(function(){try{const v=localStorage.getItem('ei_lang');return ['ko','ja','en'].includes(v)?v:'ko';}catch(e){return 'ko';}})();
 function apply(lang){
   LANG=lang;const d=I18N[lang];
+  try{localStorage.setItem('ei_lang',lang);}catch(e){}
+  try{const q=new URLSearchParams(location.search);q.set('lang',lang);history.replaceState(null,'','?'+q.toString()+location.hash);}catch(e){}
   document.documentElement.lang=lang;
   document.querySelectorAll('[data-t]').forEach(el=>{const v=d[el.dataset.t];if(v!==undefined)el.innerHTML=v;});
   document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));
@@ -648,8 +662,8 @@ function apply(lang){
   d.circuits.forEach(([nm,kw,t])=>{
     cl.insertAdjacentHTML('beforeend',`<div class="crow"><span class="nm">${nm}</span><span class="tr ${t==='g'?'g':''}"><i style="width:${Math.min(100,kw/1.5*100)}%"></i></span><span class="kw">${kw.toFixed(2)} kW</span></div>`);
   });
-  document.querySelectorAll('a[href$=".html"]').forEach(a=>{const u=a.getAttribute('href').split('?')[0];a.setAttribute('href',lang==='ko'?u:u+'?lang='+lang);});
-  document.querySelectorAll('a[href$=".html"]').forEach(a=>{const u=a.getAttribute('href').split('?')[0];a.setAttribute('href',lang==='ko'?u:u+'?lang='+lang);});
+  document.querySelectorAll('a[href$=".html"]').forEach(a=>{const u=a.getAttribute('href').split('?')[0];a.setAttribute('href',u+'?lang='+lang);});
+  document.querySelectorAll('a[href$=".html"]').forEach(a=>{const u=a.getAttribute('href').split('?')[0];a.setAttribute('href',u+'?lang='+lang);});
   tick();
 }
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>apply(b.dataset.lang)));
@@ -688,7 +702,7 @@ function tick(){
   function step(){
     const r=sec.getBoundingClientRect(), total=sec.offsetHeight-innerHeight, p=clamp(-r.top/total,0,1);
     const a=clamp(p/0.6,0,1), b=clamp((p-0.55)/0.35,0,1);
-    mv.cameraOrbit=`${lerp(-40,32,a)}deg ${lerp(82,70,a)}deg ${lerp(110,88,a)}%`;
+    mv.cameraOrbit=`${lerp(-32,26,a)}deg ${lerp(76,68,a)}deg ${lerp(105,86,a)}%`;
     mv.style.opacity=1-b; pr.style.opacity=b; pr.style.transform=`scale(${lerp(.86,1,b)})`;
     sec.classList.toggle('on',p>0.08);
   }
