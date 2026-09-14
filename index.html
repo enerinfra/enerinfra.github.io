@@ -701,33 +701,52 @@ function tick(){
   if(!sec||!mv) return;
   const lerp=(a,b,t)=>a+(b-a)*t, clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 
-  // four screen states: off -> low (green) -> mid (yellow) -> high (red)
   const SHOTS=['img/scr0.png','img/scr1.png','img/scr2.png','img/scr3.png'];
   SHOTS.forEach(u=>{const i=new Image(); i.src=u;});
-  let shot=-1, screenMat=null;
-  mv.addEventListener('load',()=>{
-    try{ screenMat=(mv.model&&mv.model.materials||[]).find(m=>m.name==='ScreenMat')||null; shot=-1; step(); }catch(e){}
-  });
-  function setShot(i){
-    if(i===shot||!screenMat) return; shot=i;
+  let want=2, shown=-1, mat=null, busy=false;
+
+  function findMat(){
     try{
-      mv.createTexture(SHOTS[i]).then(t=>{
-        screenMat.pbrMetallicRoughness.baseColorTexture.setTexture(t);
-      }).catch(()=>{});
-    }catch(e){}
+      const ms=(mv.model && mv.model.materials) || [];
+      mat = ms.find(m=>m && m.pbrMetallicRoughness && m.pbrMetallicRoughness.baseColorTexture) || ms[0] || null;
+    }catch(e){ mat=null; }
+    return mat;
+  }
+  async function paint(){
+    if(busy || want===shown) return;
+    if(!mat && !findMat()) return;
+    busy=true; const target=want;
+    try{
+      const bct = mat.pbrMetallicRoughness.baseColorTexture;
+      if(bct && bct.texture && bct.texture.source && bct.texture.source.setURI){
+        await bct.texture.source.setURI(SHOTS[target]);       // swap the image in place
+      }else if(mv.createTexture){
+        const t = await mv.createTexture(SHOTS[target]);
+        mat.pbrMetallicRoughness.baseColorTexture.setTexture(t);
+      }
+      shown=target;
+    }catch(e){ /* keep the baked texture */ }
+    busy=false;
+    if(want!==shown) paint();
   }
 
   function step(){
-    const r=sec.getBoundingClientRect(), total=sec.offsetHeight-innerHeight, p=clamp(-r.top/total,0,1);
-    // 0.00-0.55 : the unit turns toward you
-    // 0.10-0.85 : the screen climbs through the tariff bands
+    const total=Math.max(1, sec.offsetHeight-innerHeight);
+    const p=clamp(-sec.getBoundingClientRect().top/total,0,1);
     const a=clamp(p/0.55,0,1);
-    mv.cameraOrbit=`${lerp(-32,4,a)}deg ${lerp(76,70,a)}deg ${lerp(105,84,a)}%`;
-    const t=clamp((p-0.08)/0.72,0,1);
-    setShot(t<0.02?0 : t<0.38?1 : t<0.74?2 : 3);
-    if(pr){ const b=clamp((p-0.86)/0.14,0,1); pr.style.opacity=b; pr.style.transform=`scale(${lerp(.9,1,b)})`; mv.style.opacity=1-b*0.92; }
+    mv.cameraOrbit=`${lerp(-34,2,a)}deg ${lerp(78,70,a)}deg ${lerp(108,84,a)}%`;
+    const t=clamp((p-0.06)/0.74,0,1);
+    want = t<0.03 ? 0 : t<0.36 ? 1 : t<0.72 ? 2 : 3;
+    paint();
+    if(pr){ const b=clamp((p-0.88)/0.12,0,1); pr.style.opacity=b; pr.style.transform=`scale(${lerp(.9,1,b)})`; mv.style.opacity=1-b*0.92; }
     sec.classList.toggle('on',p>0.06);
   }
+
+  // the model may already be loaded, may load later, or may need a retry
+  mv.addEventListener('load',()=>{ mat=null; shown=-1; findMat(); step(); });
+  if(mv.updateComplete) mv.updateComplete.then(()=>{ findMat(); step(); }).catch(()=>{});
+  let tries=0; const iv=setInterval(()=>{ if(findMat()||++tries>40){ clearInterval(iv); step(); } },150);
+
   addEventListener('scroll',step,{passive:true}); addEventListener('resize',step); step();
 }catch(e){console.warn(e);} })();
 
