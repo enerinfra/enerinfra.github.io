@@ -304,7 +304,7 @@ body{letter-spacing:-.005em}
 .scene-head h2{background:linear-gradient(180deg,var(--ink) 0%,var(--ink2) 130%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 @media (prefers-color-scheme: dark){.scene-head h2{background:linear-gradient(180deg,#fff 0%,#B8C0CE 160%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}}
 /* cards: soft elevation + lift on hover, rounder corners, subtle top highlight */
-.step,.fcard,.card,.kcard,.tl2>div,.co .box,.qa{
+.step,.fcard,.card,.kcard,.co .box,.qa{
   box-shadow:var(--shadow-sm);border-radius:20px!important;
   transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s var(--ease);
   position:relative;overflow:hidden;
@@ -325,7 +325,7 @@ body{letter-spacing:-.005em}
 .top,.subnav{backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4)}
 /* section dividers: faint gradient line instead of hard border */
 .scene+.scene,.scene+section,section+.scene{position:relative}
-.scene::after{content:'';display:block;position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--line) 20%,var(--line) 80%,transparent)}
+
 /* numbers / stats: tighter tracking, gradient accent on the unit */
 .strip .big{background:linear-gradient(180deg,var(--ink),var(--ink2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 /* headline: refined weight + tighter leading like Apple's hero type */
@@ -357,6 +357,8 @@ body{letter-spacing:-.005em}
   .rmap{flex-direction:column;gap:10px}
   .rmap div{white-space:normal;min-width:0;border-radius:14px!important;border-left:1px solid var(--line)!important}
 }
+.tl2>div{overflow:visible!important;box-shadow:var(--shadow-sm);border-radius:20px}
+.tl2>div .d{white-space:nowrap}
 </style>
 </head>
 <body>
@@ -425,9 +427,11 @@ function apply(lang){
   try{const q=new URLSearchParams(location.search);q.set('lang',lang);history.replaceState(null,'','?'+q.toString()+location.hash);}catch(e){}document.documentElement.lang=lang;
   document.querySelectorAll('[data-t]').forEach(el=>{const v=d[el.dataset.t];if(v!==undefined)el.innerHTML=v;});
   document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));
-  document.querySelectorAll('a[href$=".html"],a[href*=".html#"]').forEach(a=>{
-    const u=a.getAttribute('href').split('?')[0];
-    a.setAttribute('href',lang==='ko'?u:u.replace(/(#.*)?$/,'?lang='+lang+'$1'));
+  document.querySelectorAll('a[href*=".html"]').forEach(a=>{
+    const h=a.getAttribute('href')||''; if(/^(https?:)?\/\//.test(h)) return;
+    const u=h.split('?')[0].split('#')[0];
+    const hash=h.indexOf('#')>=0?h.slice(h.indexOf('#')):'';
+    a.setAttribute('href',u+'?lang='+lang+hash);
   });
   if(typeof onLang==='function')onLang(lang);
 }

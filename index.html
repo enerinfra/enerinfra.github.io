@@ -268,7 +268,7 @@ body{letter-spacing:-.005em}
 .scene-head h2{background:linear-gradient(180deg,var(--ink) 0%,var(--ink2) 130%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 @media (prefers-color-scheme: dark){.scene-head h2{background:linear-gradient(180deg,#fff 0%,#B8C0CE 160%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}}
 /* cards: soft elevation + lift on hover, rounder corners, subtle top highlight */
-.step,.fcard,.card,.kcard,.tl2>div,.co .box,.qa{
+.step,.fcard,.card,.kcard,.co .box,.qa{
   box-shadow:var(--shadow-sm);border-radius:20px!important;
   transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s var(--ease);
   position:relative;overflow:hidden;
@@ -289,7 +289,7 @@ body{letter-spacing:-.005em}
 .top,.subnav{backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4)}
 /* section dividers: faint gradient line instead of hard border */
 .scene+.scene,.scene+section,section+.scene{position:relative}
-.scene::after{content:'';display:block;position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--line) 20%,var(--line) 80%,transparent)}
+
 /* numbers / stats: tighter tracking, gradient accent on the unit */
 .strip .big{background:linear-gradient(180deg,var(--ink),var(--ink2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 /* headline: refined weight + tighter leading like Apple's hero type */
@@ -323,6 +323,8 @@ body{letter-spacing:-.005em}
 }
 .subnav.show{opacity:1;pointer-events:auto}
 @media(prefers-reduced-motion:reduce){.subnav{opacity:1;pointer-events:auto}}
+.tl2>div{overflow:visible!important;box-shadow:var(--shadow-sm);border-radius:20px}
+.tl2>div .d{white-space:nowrap}
 </style>
 </head>
 <body>
@@ -653,7 +655,7 @@ I18N.en.cur='$';I18N.en.billBase=36;
 const P=new URLSearchParams(location.search);
 let LANG=['ko','ja','en'].includes(P.get('lang'))?P.get('lang'):(function(){try{const v=localStorage.getItem('ei_lang');return ['ko','ja','en'].includes(v)?v:'ko';}catch(e){return 'ko';}})();
 function apply(lang){
-  LANG=lang;const d=I18N[lang];
+  LANG=lang; window.LANG=lang;const d=I18N[lang];
   try{localStorage.setItem('ei_lang',lang);}catch(e){}
   try{const q=new URLSearchParams(location.search);q.set('lang',lang);history.replaceState(null,'','?'+q.toString()+location.hash);}catch(e){}
   document.documentElement.lang=lang;
@@ -664,8 +666,8 @@ function apply(lang){
   d.circuits.forEach(([nm,kw,t])=>{
     cl.insertAdjacentHTML('beforeend',`<div class="crow"><span class="nm">${nm}</span><span class="tr ${t==='g'?'g':''}"><i style="width:${Math.min(100,kw/1.5*100)}%"></i></span><span class="kw">${kw.toFixed(2)} kW</span></div>`);
   });
-  document.querySelectorAll('a[href$=".html"]').forEach(a=>{const u=a.getAttribute('href').split('?')[0];a.setAttribute('href',u+'?lang='+lang);});
-  document.querySelectorAll('a[href$=".html"]').forEach(a=>{const u=a.getAttribute('href').split('?')[0];a.setAttribute('href',u+'?lang='+lang);});
+  document.querySelectorAll('a[href*=".html"]').forEach(a=>{const h=a.getAttribute('href')||'';if(/^(https?:)?\/\//.test(h))return;const u=h.split('?')[0].split('#')[0];const hash=h.indexOf('#')>=0?h.slice(h.indexOf('#')):'';a.setAttribute('href',u+'?lang='+lang+hash);});
+  document.querySelectorAll('a[href*=".html"]').forEach(a=>{const h=a.getAttribute('href')||'';if(/^(https?:)?\/\//.test(h))return;const u=h.split('?')[0].split('#')[0];const hash=h.indexOf('#')>=0?h.slice(h.indexOf('#')):'';a.setAttribute('href',u+'?lang='+lang+hash);});
   tick();
 }
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>apply(b.dataset.lang)));
@@ -703,9 +705,11 @@ function tick(){
   if(!sec||!mv) return;
   const lerp=(a,b,t)=>a+(b-a)*t, clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 
-  const SHOTS=['img/scr0.png','img/scr1.png','img/scr2.png','img/scr3.png'];
-  SHOTS.forEach(u=>{const i=new Image(); i.src=u;});
-  let want=2, shown=-1, mat=null, busy=false;
+  const SETS={ko:[],ja:[],en:[]};
+  Object.keys(SETS).forEach(l=>{ for(let i=0;i<4;i++){ const u=`img/scr_${l}_${i}.png`; SETS[l].push(u); const im=new Image(); im.src=u; } });
+  const curLang=()=>(window.LANG&&SETS[window.LANG])?window.LANG:(SETS[(typeof LANG!=='undefined'?LANG:'ko')]?(typeof LANG!=='undefined'?LANG:'ko'):'ko');
+  let SHOTS=SETS[curLang()];
+  let want=2, shown=-1, mat=null, busy=false, shotLang=curLang();
 
   function findMat(){
     try{
@@ -715,7 +719,8 @@ function tick(){
     return mat;
   }
   async function paint(){
-    if(busy || want===shown) return;
+    if(busy || (want===shown && shotLang===curLang())) return;
+    if(shotLang!==curLang()){ shotLang=curLang(); SHOTS=SETS[shotLang]; shown=-1; }
     if(!mat && !findMat()) return;
     busy=true; const target=want;
     try{
@@ -754,7 +759,9 @@ function tick(){
   if(mv.updateComplete) mv.updateComplete.then(()=>{ findMat(); step(); }).catch(()=>{});
   let tries=0; const iv=setInterval(()=>{ if(findMat()||++tries>40){ clearInterval(iv); step(); } },150);
 
-  addEventListener('scroll',step,{passive:true}); addEventListener('resize',step); step();
+  addEventListener('scroll',step,{passive:true}); addEventListener('resize',step);
+  document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setTimeout(step,30)));
+  step();
 }catch(e){console.warn(e);} })();
 
 
