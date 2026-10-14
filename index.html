@@ -308,6 +308,11 @@ body{letter-spacing:-.005em}
 /* mobile: slightly tighter section padding so it doesn't feel empty on small screens */
 @media(max-width:720px){.scene{padding:80px 0 84px}.scene-head{margin-bottom:40px}}
 
+/* --- everyday scene: family photo band --- */
+.life{margin:0 auto;max-width:1040px}
+.life img{display:block;width:100%;height:auto;border-radius:18px;box-shadow:var(--shadow-lg)}
+#life .scene-head h2,#life .scene-head p{word-break:keep-all}
+
 /* --- readable CTA button on the dark closing band --- */
 .cta .btn,.cta a.btn,.cta .btn-amber{background:var(--amber)!important;color:#0E1B33!important;border-color:var(--amber)!important;font-weight:800}
 .cta .btn:hover{background:var(--amber-l)!important;color:#0E1B33!important}
@@ -376,6 +381,18 @@ body{letter-spacing:-.005em}
     <a href="contact.html" class="btn btn-amber" style="padding:7px 16px;font-size:12px;border-bottom:0" data-t="c2">문의하기</a>
   </div>
 </div>
+
+<!-- ============ 장면 0: 생활 ============ -->
+<section class="scene" id="life">
+  <div class="wrap">
+    <div class="scene-head rv">
+      <div class="kick" data-t="lfk">EVERYDAY</div>
+      <h2 data-t="lfh"></h2>
+      <p data-t="lfp"></p>
+    </div>
+    <figure class="life rv"><img src="img/life_family.jpg" width="1305" height="860" loading="lazy" alt="POWERBOARD"></figure>
+  </div>
+</section>
 
 <!-- ============ 장면 1: 설치 ============ -->
 <section class="scene white" id="install">
@@ -540,6 +557,7 @@ ko:{
  h1s:'POWERBOARD는 지금 쓰는 전력과 이번 달 예상 요금을 분전반 위에 항상 켜 둡니다. 공사 없이, 앱 없이.', proto:'시제품 R02 · 이번 달 누적 금액을 그대로 표시 · 실제 동작 사진',
  c1:'자세히 보기',c2:'문의하기',
  l1:'현재 사용 전력',l2:'이번 달 누적',l3:'태양광 (예정)',l4:'이번 달 예상 요금',
+ lfk:'EVERYDAY',lfh:'아이가 먼저 콘센트를 뽑습니다.',lfp:'아이가 있는 실증 9가정 모두, 아이가 먼저 콘센트를 뽑았습니다. 숫자를 몰라도 색과 표정으로 알 수 있습니다.',
  s1k:'INSTALLATION',s1h:'커버 하나 바꾸는 시간이면 됩니다.',
  s1p:'전선을 자르지 않습니다. 기존 분전반의 커버를 떼고, 센서를 물리고, POWERBOARD를 끼웁니다.',
  st1h:'커버를 뗍니다',st1p:'기존 분전반 커버의 나사만 풉니다.',
@@ -579,6 +597,7 @@ ja:{
  h1s:'POWERBOARDは、今の消費電力と太陽光の発電量を分電盤の上に常時表示します。工事なし、アプリなし。', proto:'試作機R02 · 今月の累計金額をそのまま表示 · 実機の動作写真',
  c1:'詳しく見る',c2:'お問い合わせ',
  l1:'現在の消費電力',l2:'今月の累計',l3:'太陽光（予定）',l4:'今月の予想電気代',
+ lfk:'EVERYDAY',lfh:'子どもが先にコンセントを抜きます。',lfp:'お子さまのいる実証家庭9世帯すべてで、子どもが先にコンセントを抜きました。数字が分からなくても、色と表情で分かります。',
  s1k:'INSTALLATION',s1h:'カバーを一枚替える時間で済みます。',
  s1p:'電線は切りません。既存の分電盤カバーを外し、センサーを取り付け、POWERBOARDをはめ込むだけです。',
  st1h:'カバーを外す',st1p:'既存カバーのネジを外します。',
@@ -618,6 +637,7 @@ en:{
  h1s:'POWERBOARD keeps your live consumption and projected bill on the breaker panel, always on. No rewiring, no app.', proto:'Prototype R02 · shows the month-to-date bill, not just kWh · photo of the working unit',
  c1:'Learn more',c2:'Contact',
  l1:'Current load',l2:'This month',l3:'Solar (planned)',l4:'Projected bill',
+ lfk:'EVERYDAY',lfh:'Kids unplug first.',lfp:'In all 9 trial homes with children, the kids were the first to unplug. No numbers needed: color and a face tell them.',
  s1k:'INSTALLATION',s1h:'It takes as long as changing a cover.',
  s1p:'No wire is cut. Remove the existing cover, clip on the sensors, fit POWERBOARD in its place.',
  st1h:'Remove the cover',st1p:'Unscrew the existing panel cover.',
