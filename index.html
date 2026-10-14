@@ -312,6 +312,8 @@ body{letter-spacing:-.005em}
 .life{margin:0 auto;max-width:1040px}
 .life img{display:block;width:100%;height:auto;border-radius:18px;box-shadow:var(--shadow-lg)}
 #life .scene-head h2,#life .scene-head p{word-break:keep-all}
+#life{padding-top:100px}#life .scene-head{margin-bottom:40px}
+@media(max-width:720px){#life{padding-top:88px;padding-bottom:56px}}
 
 /* --- readable CTA button on the dark closing band --- */
 .cta .btn,.cta a.btn,.cta .btn-amber{background:var(--amber)!important;color:#0E1B33!important;border-color:var(--amber)!important;font-weight:800}
@@ -354,6 +356,18 @@ body{letter-spacing:-.005em}
   </div>
 </header>
 
+<!-- ============ 메인: 생활 이미지 ============ -->
+<section class="scene" id="life">
+  <div class="wrap">
+    <div class="scene-head rv">
+      <div class="kick" data-t="lfk">EVERYDAY</div>
+      <h2 data-t="lfh"></h2>
+      <p data-t="lfp"></p>
+    </div>
+    <figure class="life rv"><img src="img/life_family.jpg" width="1305" height="860" loading="eager" fetchpriority="high" alt="POWERBOARD"></figure>
+  </div>
+</section>
+
 <!-- ============ HERO ============ -->
 <section class="hero3d" id="hero">
   <div class="sticky">
@@ -381,18 +395,6 @@ body{letter-spacing:-.005em}
     <a href="contact.html" class="btn btn-amber" style="padding:7px 16px;font-size:12px;border-bottom:0" data-t="c2">문의하기</a>
   </div>
 </div>
-
-<!-- ============ 장면 0: 생활 ============ -->
-<section class="scene" id="life">
-  <div class="wrap">
-    <div class="scene-head rv">
-      <div class="kick" data-t="lfk">EVERYDAY</div>
-      <h2 data-t="lfh"></h2>
-      <p data-t="lfp"></p>
-    </div>
-    <figure class="life rv"><img src="img/life_family.jpg" width="1305" height="860" loading="lazy" alt="POWERBOARD"></figure>
-  </div>
-</section>
 
 <!-- ============ 장면 1: 설치 ============ -->
 <section class="scene white" id="install">
